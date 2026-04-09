@@ -1,73 +1,155 @@
-# Welcome to your Lovable project
+# EduResult - Campus Results Hub
 
-## Project info
+A React-based campus results portal for searching student records, reviewing semester performance, and managing demo academic workflows in one place.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Overview
 
-## How can I edit this code?
+EduResult is a single-page student result portal built with React and Vite. It lets a student search by Student ID and view a complete academic profile, semester-wise marks, SGPA/CGPA, performance analytics, and a downloadable report. The app also includes a demo admin dashboard for managing student records and reviewing mark change requests.
 
-There are several ways of editing your application.
+This project is useful as a front-end portfolio piece for campus systems, academic dashboards, and admin-style interfaces that need routing, local data handling, and structured UI components.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- Student ID search: Find one of the built-in demo student records from the home page and open the detailed result view.
+- Semester-wise results: Inspect marks, grades, grade points, SGPA, and subject credits for all eight semesters.
+- Student profile summary: See the student's name, branch, batch, email, enrollment date, total credits, and CGPA.
+- Performance analytics: Compare a student's CGPA against the class average, recent semester trend, and current rank.
+- Class leaderboard: Show the top five students by CGPA and highlight the current student's standing.
+- Academic report download: Export a text-based academic report for the selected student.
+- Mark change requests: Students can submit a mark change request for a semester and subject with a reason and requested marks.
+- Admin login and dashboard: A demo admin area is available for searching, adding, editing, and deleting student records.
+- Pending request review: Admins can approve or reject pending mark change requests and leave review comments.
+- CSV and JSON export: Admins can export the current student list for offline use.
+- Responsive UI and theme toggle: The interface adapts to different screen sizes and supports light/dark mode.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+- TypeScript
+- React 18
+- Vite
+- React Router DOM
+- TanStack Query
+- Tailwind CSS
+- shadcn/ui components
+- Radix UI primitives
+- Lucide React icons
+- Sonner and shadcn toast components
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Project Structure
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- `src/main.tsx` -> React entry point that mounts the app.
+- `src/App.tsx` -> Global providers and route definitions.
+- `src/pages/` -> Route-level screens for the home page, student results, admin dashboard, and 404 page.
+- `src/components/` -> Reusable UI blocks for search, profile cards, analytics, dialogs, tables, and the dashboard.
+- `src/components/ui/` -> Shared shadcn/ui primitives used across the app.
+- `src/lib/mockData.ts` -> Demo student records, grade logic, and GPA calculations.
+- `src/lib/requestData.ts` -> In-memory mark change request store and approval helpers.
+- `src/hooks/` -> Shared hooks such as toast and mobile detection helpers.
+- `src/index.css` -> Theme tokens, fonts, gradients, shadows, and custom animations.
+- `public/` -> Static assets served directly by Vite.
+- Root config files such as `vite.config.ts`, `tailwind.config.ts`, `components.json`, `tsconfig*.json`, and `eslint.config.js` -> Build, styling, aliasing, and linting setup.
 
-Follow these steps:
+## Setup & Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+This project uses Node.js and npm.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+git clone <repo-url>
+cd campus-results-hub
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+1. `git clone <repo-url>` downloads the repository to your computer.
+2. `cd campus-results-hub` moves into the project folder.
+3. `npm install` installs all required dependencies.
+4. `npm run dev` starts the local development server.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Open the app in your browser at `http://localhost:8080`.
 
-**Use GitHub Codespaces**
+## Usage Examples
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+npm run dev
+```
 
-## What technologies are used for this project?
+Starts the development server with hot reload for local development.
 
-This project is built with:
+```bash
+npm run build
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Creates a production-ready build in the `dist` folder.
 
-## How can I deploy this project?
+```bash
+npm run preview
+```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Previews the production build locally after it has been generated.
 
-## Can I connect a custom domain to my Lovable project?
+For the student portal, enter one of the built-in demo IDs such as `CSE2021001`, `CSE2021002`, `ECE2021001`, or `ME2021001`.
 
-Yes, you can!
+For the admin dashboard, use the demo credentials:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- Username: `admin`
+- Password: `admin123`
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Example Output
+
+The exact values change because the demo marks are generated in memory for the bundled student records.
+
+```text
+Student ID: CSE2021001
+Name: Rahul Kumar Singh
+Branch: Computer Science & Engineering
+CGPA: 8.42
+Total Credits: 176
+
+Semester 3
+SGPA: 8.16
+Database Management Systems -> 72 | B+
+Operating Systems -> 81 | A
+Software Engineering -> 74 | B+
+```
+
+## How It Works
+
+1. The user enters a Student ID on the home page.
+2. The app looks up the student in the in-memory demo dataset.
+3. If the student exists, the app navigates to the result page and loads their profile, semester tabs, analytics, and leaderboard data.
+4. The user can download a text report or submit a mark change request from the student view.
+5. The admin dashboard uses a separate demo login and lets the user manage records, review pending requests, and export student data.
+
+## Limitations / Notes
+
+- All academic data is mock data stored in memory, not in a database.
+- Student edits, added records, and mark change requests are not persisted after a refresh.
+- The admin login is demo-only and uses hardcoded credentials.
+- Marks for the bundled student records are randomly generated when the app loads.
+- The report download is a `.txt` file, not a PDF.
+- The CSV/JSON import control is present in the admin UI, but the imported data is not wired into the student list.
+- No external API or backend service is connected.
+
+## Learning Outcomes
+
+This project demonstrates:
+
+- React routing and page composition
+- TypeScript data modeling and utility functions
+- Local state management and in-memory data updates
+- Form handling, dialogs, tabs, tables, and dashboards
+- GPA and CGPA calculation logic
+- Browser-based file export patterns
+- Responsive UI design with Tailwind CSS and component primitives
+
+## Future Improvements
+
+- Connect the app to a real backend and database.
+- Replace the demo admin login with proper authentication and authorization.
+- Persist student changes and mark requests across sessions.
+- Wire the CSV/JSON import flow into the student management table.
+- Generate actual PDF reports instead of plain text downloads.
+
+## Disclaimer
+
+This project is a demo academic portal built for learning and portfolio use. It is not a production-grade student records system and should not be used as-is for real institutional data.
